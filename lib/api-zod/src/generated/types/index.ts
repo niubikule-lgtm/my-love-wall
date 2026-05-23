@@ -10,6 +10,7 @@ export * from './comment';
 export * from './commentInput';
 export * from './healthStatus';
 export * from './likeResult';
+export * from './listPostsFilter';
 export * from './listPostsParams';
 export * from './listPostsSort';
 export * from './post';

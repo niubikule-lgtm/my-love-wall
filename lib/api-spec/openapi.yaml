@@ -55,6 +55,12 @@ paths:
             type: string
             enum: [latest, popular]
             default: latest
+        - name: filter
+          in: query
+          schema:
+            type: string
+            enum: [all, today]
+            default: all
       responses:
         "200":
           description: List of posts

@@ -5,10 +5,12 @@
  * 校园表白墙 API
  * OpenAPI spec version: 0.1.0
  */
+import type { ListPostsFilter } from './listPostsFilter';
 import type { ListPostsSort } from './listPostsSort';
 
 export type ListPostsParams = {
 page?: number;
 pageSize?: number;
 sort?: ListPostsSort;
+filter?: ListPostsFilter;
 };

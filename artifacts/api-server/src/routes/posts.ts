@@ -57,14 +57,15 @@ router.get("/posts", async (req, res): Promise<void> => {
     return;
   }
 
-  const { page, pageSize, sort } = parsed.data;
+  const { page, pageSize, sort, filter } = parsed.data;
   const offset = (page - 1) * pageSize;
 
   const orderBy = sort === "popular" ? desc(postsTable.likeCount) : desc(postsTable.createdAt);
+  const whereClause = filter === "today" ? sql`${postsTable.createdAt} >= current_date` : undefined;
 
   const [posts, [{ count }]] = await Promise.all([
-    db.select().from(postsTable).orderBy(orderBy).limit(pageSize).offset(offset),
-    db.select({ count: sql<number>`count(*)::int` }).from(postsTable),
+    db.select().from(postsTable).where(whereClause).orderBy(orderBy).limit(pageSize).offset(offset),
+    db.select({ count: sql<number>`count(*)::int` }).from(postsTable).where(whereClause),
   ]);
 
   const sessionId = getSessionId(req);

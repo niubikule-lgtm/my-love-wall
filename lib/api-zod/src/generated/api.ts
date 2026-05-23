@@ -23,11 +23,13 @@ export const HealthCheckResponse = zod.object({
 export const listPostsQueryPageDefault = 1;
 export const listPostsQueryPageSizeDefault = 20;
 export const listPostsQuerySortDefault = `latest`;
+export const listPostsQueryFilterDefault = `all`;
 
 export const ListPostsQueryParams = zod.object({
   "page": zod.coerce.number().default(listPostsQueryPageDefault),
   "pageSize": zod.coerce.number().default(listPostsQueryPageSizeDefault),
-  "sort": zod.enum(['latest', 'popular']).default(listPostsQuerySortDefault)
+  "sort": zod.enum(['latest', 'popular']).default(listPostsQuerySortDefault),
+  "filter": zod.enum(['all', 'today']).default(listPostsQueryFilterDefault)
 })
 
 export const ListPostsResponse = zod.object({

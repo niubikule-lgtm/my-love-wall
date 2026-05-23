@@ -7,16 +7,21 @@ import { PostCard } from "@/components/post-card";
 import { AnnouncementBoard } from "@/components/announcement-board";
 import { WelcomeBanner } from "@/components/welcome-banner";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
+import { Sparkles, Sun, ChevronLeft, ChevronRight } from "lucide-react";
 
 const PAGE_SIZE = 10;
 
+type Filter = "all" | "today";
+
 export default function Home() {
   const [page, setPage] = useState(1);
+  const [filter, setFilter] = useState<Filter>("all");
+
+  const params = { page, pageSize: PAGE_SIZE, sort: "latest" as const, filter };
 
   const { data, isLoading } = useListPosts(
-    { page, pageSize: PAGE_SIZE, sort: "latest" },
-    { query: { queryKey: getListPostsQueryKey({ page, pageSize: PAGE_SIZE, sort: "latest" }) } }
+    params,
+    { query: { queryKey: getListPostsQueryKey(params) } }
   );
 
   const totalPages = data ? Math.ceil(data.total / PAGE_SIZE) : 1;
@@ -26,6 +31,11 @@ export default function Home() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleFilterChange = (f: Filter) => {
+    setFilter(f);
+    setPage(1);
+  };
+
   return (
     <Layout>
       <WelcomeBanner />
@@ -33,12 +43,37 @@ export default function Home() {
       <AnnouncementBoard />
       <ComposePost />
 
-      <div className="flex items-center gap-2 mb-6">
-        <Sparkles className="w-5 h-5 text-primary" />
+      <div className="flex items-center gap-2 mb-5">
+        <Sparkles className="w-5 h-5 text-primary shrink-0" />
         <h3 className="font-serif font-bold text-lg">最新心声</h3>
+
+        <div className="ml-auto flex items-center gap-1.5">
+          <button
+            onClick={() => handleFilterChange("all")}
+            className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium transition-colors border ${
+              filter === "all"
+                ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                : "border-primary/20 bg-white/60 text-muted-foreground hover:bg-primary/10"
+            }`}
+          >
+            全部
+          </button>
+          <button
+            onClick={() => handleFilterChange("today")}
+            className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium transition-colors border ${
+              filter === "today"
+                ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                : "border-primary/20 bg-white/60 text-muted-foreground hover:bg-primary/10"
+            }`}
+          >
+            <Sun className="w-3 h-3" />
+            今日
+          </button>
+        </div>
+
         {data && data.total > 0 && (
-          <span className="ml-auto text-xs text-muted-foreground">
-            共 {data.total} 条 · 第 {page}/{totalPages} 页
+          <span className="text-xs text-muted-foreground whitespace-nowrap">
+            {data.total} 条 · {page}/{totalPages} 页
           </span>
         )}
       </div>
@@ -58,7 +93,7 @@ export default function Home() {
 
         {!isLoading && data?.posts?.length === 0 && (
           <div className="text-center py-20 text-muted-foreground bg-white/40 dark:bg-black/10 rounded-2xl border border-dashed border-primary/20">
-            还没有人表白，快来做第一个吧！
+            {filter === "today" ? "今天还没有人表白，快来做第一个吧！" : "还没有人表白，快来做第一个吧！"}
           </div>
         )}
       </div>

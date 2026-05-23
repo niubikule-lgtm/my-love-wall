@@ -70,6 +70,7 @@ export type ListPostsParams = {
 page?: number;
 pageSize?: number;
 sort?: ListPostsSort;
+filter?: ListPostsFilter;
 };
 
 export type ListPostsSort = typeof ListPostsSort[keyof typeof ListPostsSort];
@@ -78,5 +79,13 @@ export type ListPostsSort = typeof ListPostsSort[keyof typeof ListPostsSort];
 export const ListPostsSort = {
   latest: 'latest',
   popular: 'popular',
+} as const;
+
+export type ListPostsFilter = typeof ListPostsFilter[keyof typeof ListPostsFilter];
+
+
+export const ListPostsFilter = {
+  all: 'all',
+  today: 'today',
 } as const;
 
