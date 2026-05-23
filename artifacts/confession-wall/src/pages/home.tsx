@@ -4,6 +4,7 @@ import { StatsBar } from "@/components/stats-bar";
 import { ComposePost } from "@/components/compose-post";
 import { PostCard } from "@/components/post-card";
 import { AnnouncementBoard } from "@/components/announcement-board";
+import { WelcomeBanner } from "@/components/welcome-banner";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Sparkles } from "lucide-react";
 
@@ -15,6 +16,7 @@ export default function Home() {
 
   return (
     <Layout>
+      <WelcomeBanner />
       <StatsBar />
       <AnnouncementBoard />
       <ComposePost />
