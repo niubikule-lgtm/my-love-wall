@@ -71,6 +71,7 @@ page?: number;
 pageSize?: number;
 sort?: ListPostsSort;
 filter?: ListPostsFilter;
+q?: string;
 };
 
 export type ListPostsSort = typeof ListPostsSort[keyof typeof ListPostsSort];

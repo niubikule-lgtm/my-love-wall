@@ -13,4 +13,5 @@ page?: number;
 pageSize?: number;
 sort?: ListPostsSort;
 filter?: ListPostsFilter;
+q?: string;
 };

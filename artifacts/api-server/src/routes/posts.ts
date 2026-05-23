@@ -57,11 +57,15 @@ router.get("/posts", async (req, res): Promise<void> => {
     return;
   }
 
-  const { page, pageSize, sort, filter } = parsed.data;
+  const { page, pageSize, sort, filter, q } = parsed.data;
   const offset = (page - 1) * pageSize;
 
   const orderBy = sort === "popular" ? desc(postsTable.likeCount) : desc(postsTable.createdAt);
-  const whereClause = filter === "today" ? sql`${postsTable.createdAt} >= current_date` : undefined;
+
+  const conditions = [];
+  if (filter === "today") conditions.push(sql`${postsTable.createdAt} >= current_date`);
+  if (q && q.trim()) conditions.push(sql`${postsTable.content} ilike ${"%" + q.trim() + "%"}`);
+  const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
 
   const [posts, [{ count }]] = await Promise.all([
     db.select().from(postsTable).where(whereClause).orderBy(orderBy).limit(pageSize).offset(offset),

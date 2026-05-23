@@ -29,7 +29,8 @@ export const ListPostsQueryParams = zod.object({
   "page": zod.coerce.number().default(listPostsQueryPageDefault),
   "pageSize": zod.coerce.number().default(listPostsQueryPageSizeDefault),
   "sort": zod.enum(['latest', 'popular']).default(listPostsQuerySortDefault),
-  "filter": zod.enum(['all', 'today']).default(listPostsQueryFilterDefault)
+  "filter": zod.enum(['all', 'today']).default(listPostsQueryFilterDefault),
+  "q": zod.coerce.string().optional()
 })
 
 export const ListPostsResponse = zod.object({
