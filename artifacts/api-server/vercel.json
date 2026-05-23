@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/artifacts/api-server/api/index.js" },
+    { "source": "/(.*)", "destination": "/artifacts/confession-wall/dist/$1" }
+  ]
+}
