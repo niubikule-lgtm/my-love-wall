@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "校园表白墙"
+version = "1.0.0"
+id = "artifacts/confession-wall"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19073
+
+[services.development]
+run = "pnpm --filter @workspace/confession-wall run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/confession-wall", "run", "build" ]
+publicDir = "artifacts/confession-wall/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19073"
+BASE_PATH = "/"
