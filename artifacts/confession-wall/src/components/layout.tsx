@@ -10,7 +10,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div className="container mx-auto flex h-16 max-w-2xl items-center justify-between px-4">
           <Link href="/" className="flex items-center gap-2 text-primary hover:opacity-80 transition-opacity">
             <Heart className="h-6 w-6 fill-current" />
-            <span className="font-serif text-xl font-bold">校园表白墙</span>
+            <span className="font-serif text-xl font-bold">东方表白墙</span>
           </Link>
           <nav className="flex items-center gap-6 text-sm font-medium">
             <Link 

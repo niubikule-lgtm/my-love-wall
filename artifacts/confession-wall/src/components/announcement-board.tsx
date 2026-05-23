@@ -12,14 +12,6 @@ const announcements = [
     pinColor: "text-rose-400",
   },
   {
-    id: 2,
-    tag: "活动预告",
-    content: "🌸 五月心意季活动进行中！发布表白帖即有机会被学校官方账号转载，快来参与吧～",
-    color: "bg-pink-50 border-pink-200",
-    tagColor: "bg-pink-100 text-pink-500",
-    pinColor: "text-pink-400",
-  },
-  {
     id: 3,
     tag: "使用说明",
     content: "点击帖子卡片可查看详情和评论，右下角心形图标可以点赞，每条表白最多 500 字。",
