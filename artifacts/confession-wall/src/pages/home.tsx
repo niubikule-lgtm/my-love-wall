@@ -3,6 +3,7 @@ import { Layout } from "@/components/layout";
 import { StatsBar } from "@/components/stats-bar";
 import { ComposePost } from "@/components/compose-post";
 import { PostCard } from "@/components/post-card";
+import { AnnouncementBoard } from "@/components/announcement-board";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Sparkles } from "lucide-react";
 
@@ -15,6 +16,7 @@ export default function Home() {
   return (
     <Layout>
       <StatsBar />
+      <AnnouncementBoard />
       <ComposePost />
       
       <div className="flex items-center gap-2 mb-6">
