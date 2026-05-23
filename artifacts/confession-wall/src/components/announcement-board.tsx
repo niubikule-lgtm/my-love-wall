@@ -19,6 +19,14 @@ const announcements = [
     tagColor: "bg-fuchsia-100 text-fuchsia-500",
     pinColor: "text-fuchsia-400",
   },
+  {
+    id: 4,
+    tag: "再次提示",
+    content: "再次提醒，请各位同学使用时遵守本站规则，禁止发布任何人身攻击或不雅内容。本站站长 @下北泽第一贝斯手凉乞钞 对内容进行全面监管并短暂记录访问者 IP。",
+    color: "bg-amber-50 border-amber-200",
+    tagColor: "bg-amber-100 text-amber-600",
+    pinColor: "text-amber-400",
+  },
 ];
 
 export function AnnouncementBoard() {
